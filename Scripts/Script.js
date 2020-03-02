@@ -11,7 +11,7 @@ function prueba(){
     laberinto = new Laberinto(5,5);
     laberinto.generar();
     console.log(laberinto);
-    console.log("su puta madre :",x,y);
+    console.log(" :",x,y);
     console.log(laberinto.getCasilla(x,y))
 }
 function controlador(evento){
@@ -42,7 +42,7 @@ function controlador(evento){
         }
         */
        x -=1;
-       console.log("su puta madre :",x,y);
+       console.log(" :",x,y);
        console.log(laberinto.getCasilla(x,y));
     }
     if(evento.which == 38){//Arriba
@@ -54,7 +54,7 @@ function controlador(evento){
         }
         jugador.avanzar(new Casilla("Do","Mayor"));
         */
-       y += 1;
+       y -= 1;
        console.log("su puta madre :",x,y);
        console.log(laberinto.getCasilla(x,y));
     }
@@ -79,7 +79,7 @@ function controlador(evento){
         }
         //jugador.avanzar(new Casilla("Do", "Menor"));
         */
-       y -= 1;
+       y += 1;
        console.log("su puta madre :",x,y);
        console.log(laberinto.getCasilla(x,y));
     }
