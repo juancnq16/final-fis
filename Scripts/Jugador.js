@@ -4,6 +4,9 @@ class Jugador{
         this.puntaje=0;
         this.jugando=true;
         this.casilla.reproducir();
+        this.posX = 0;
+        this.posY = 0;
+        this.sentido = '';
     }
     avanzar(casilla){
         if(this.casilla.escala != casilla.escala){ //si las escalas son distintas
@@ -23,5 +26,23 @@ class Jugador{
                 this.casilla.reproducir();
             }
         }
+    }
+    avanzaX(){
+        this.posX +=1;
+    }
+    avanzaY(){
+        this.posY +=1;
+    }
+    retroX(){
+        this.getX -=1;
+    }
+    retroY(){
+        this.posX -=1;
+    }
+    getX(){
+        return this.posX;
+    }
+    getY(){
+        return this.posY;
     }
 }

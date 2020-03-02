@@ -94,6 +94,9 @@ class Laberinto{
             }
         }
     }
+    getCasilla(x,y){
+        return this.casillas[y][x];
+    }
 
     generar(){
 
@@ -181,7 +184,5 @@ class Laberinto{
                 porVisitar.splice(x, 1);
             }
         }
-
-
     }
 }

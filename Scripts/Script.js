@@ -4,15 +4,19 @@ $(document).click(saludo)
 var voz = window.speechSynthesis;
 var jugador;
 var jugando = false;
+var laberinto;
+var x = 0;
+var y = 0;
 function prueba(){
-    var laberinto = new Laberinto(3,3);
+    laberinto = new Laberinto(5,5);
     laberinto.generar();
     console.log(laberinto);
+    console.log("su puta madre :",x,y);
+    console.log(laberinto.getCasilla(x,y))
 }
 function controlador(evento){
-    console.log(evento.which);
     if(evento.which == 73){//Instruciiones
-        var instrucciones = "Instrucciones pendientes";
+        var instrucciones = "usa las flechas para navegar dentro del laberinto";
         hablar(instrucciones);
     }
     if(evento.which == 70){//Iniciar
@@ -21,27 +25,70 @@ function controlador(evento){
             jugando = true;
             setTimeout('init()', 3000);
         }else{
-
+            console.log("juego activo, por favor espere");
         }
     }
-    if(event.which == 83){//salir
+    if(evento.which == 83){//salir
         var salir = "Gracias por jugar"
         hablar(salir);
+        jugando = false;
     }
-    if (event.which == 37){//Izquierda
-
+    if (evento.which == 37){//Izquierda
+        /*
+        if (jugador.sentido == 'derecha'){
+            //jugador.cambiaSentido();
+        }else{
+            //jugador.mover()
+        }
+        */
+       x -=1;
+       console.log("su puta madre :",x,y);
+       console.log(laberinto.getCasilla(x,y));
     }
     if(evento.which == 38){//Arriba
+        /*
+        if (jugador.sentido == 'abajo'){
+            //jugador.cambiaSentido('arriba');
+        }else{
+            //jugador.mover()
+        }
         jugador.avanzar(new Casilla("Do","Mayor"));
+        */
+       y += 1;
+       console.log("su puta madre :",x,y);
+       console.log(laberinto.getCasilla(x,y));
     }
     if(evento.which == 39){//Derecha
+        /*
+        if (jugador.sentido == 'derecha'){
+            //jugador.cambiaSentido();
+        }else{
+            //jugador.mover()
+        }
+        */
+       x+=1;
+       console.log("su puta madre :",x,y);
+       console.log(laberinto.getCasilla(x,y));
     }
     if(evento.which==40){//Abajo
-        jugador.avanzar(new Casilla("Do", "Menor"));
+        /*
+        if (jugador.sentido == 'derecha'){
+            //jugador.cambiaSentido();
+        }else{
+            //jugador.mover()
+        }
+        //jugador.avanzar(new Casilla("Do", "Menor"));
+        */
+       y -= 1;
+       console.log("su puta madre :",x,y);
+       console.log(laberinto.getCasilla(x,y));
     }
 }
 function init(){
     var initCasilla = new Casilla2("Do","Menor");
+    laberinto = new Laberinto(4,4);
+    laberinto.generar();
+    console.log(laberinto);
     jugador = new Jugador(initCasilla);
 }
 function saludo(){
