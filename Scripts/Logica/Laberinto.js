@@ -1,78 +1,3 @@
-function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-    }
-    return a;
-}
-class Casilla{
-
-    constructor(numero){
-        this.numero=numero;
-        this.vecinoSup=false;
-        this.vecinoInf=false;
-        this.vecinoIzq=false;
-        this.vecinoDer=false;
-        this.sonido="N";   
-    }
-
-
-    getNumero() {
-            return this.numero;
-    }
-    getSonido() {
-            return this.sonido;
-    }
-
-    setSonido(sonido) {
-            this.sonido = sonido;
-    }
-
-    setNumero(numero) {
-            this.numero = numero;
-    }
-
-    tieneVecinoSup() {
-            return this.vecinoSup;
-    }
-
-    setVecinoSup(vecinoSup) {
-            this.vecinoSup = vecinoSup;
-    }
-
-    tieneVecinoInf() {
-            return vecinoInf;
-    }
-
-    setVecinoInf(vecinoInf) {
-            this.vecinoInf = vecinoInf;
-    }
-
-    tieneVecinoIzq() {
-            return vecinoIzq;
-    }
-
-    setVecinoIzq(vecinoIzq) {
-            this.vecinoIzq = vecinoIzq;
-    }
-
-    tieneVecinoDer() {
-            return vecinoDer;
-    }
-
-    setVecinoDer( vecinoDer) {
-            this.vecinoDer = vecinoDer;
-    }
-
-    toString(){
-            return this.numero+"";
-    }
-
-}
-
 class Laberinto{
 
     constructor(filas, columnas){
@@ -126,7 +51,7 @@ class Laberinto{
                 if (j != this.columnas - 1) {
                     direcciones[numero].unshift(this.DERECHA);
                 }
-                shuffle(direcciones[numero]);
+                this.shuffle(direcciones[numero]);
             }
         }
 
@@ -184,5 +109,15 @@ class Laberinto{
                 porVisitar.splice(x, 1);
             }
         }
+    }
+    shuffle(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
     }
 }
