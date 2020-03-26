@@ -72,4 +72,7 @@ class Jugador{
             this.reproductor.volvemos();
         }
     }
+    silence(){
+        this.reproductor.pause();
+    }
 }

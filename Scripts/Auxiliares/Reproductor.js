@@ -19,4 +19,8 @@ class Reproductor{
         console.log("el led ",this.led);
         return this.led;
     }
+    pause(){
+        this.ida.pause();
+        this.vuelta.pause();
+    }
 }

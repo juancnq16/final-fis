@@ -22,13 +22,13 @@ function prueba(){
 function controlador(evento){
     console.log(evento.which);
     if(evento.which == 13 && !jugando){//el saludo
-        console.log(voz);
         voz.saludo();
-        console.log("hope");
     }
     if(evento.which == 73 && !jugando){//Instruciiones
         var instrucciones = "usa las flechas para navegar dentro del laberinto. "
-        +"iniciará en la esquina superior izquierda del laberinto";
+        +"iniciará en la esquina superior izquierda del laberinto. "
+        +"siga la melodia alegre hasta el final del laberinto. "
+        +"cuidado con los muros, y suerte..";
 
         voz.hablar(instrucciones);
     }
@@ -54,7 +54,6 @@ function controlador(evento){
                     var casilla = laberinto.getCasilla(x,y);
                     var sentido = 'izquierda';
                     jugador.avanzar(casilla, sentido);
-                    console.log("el sentido: ",jugador.sentido,"el opuesto: ", jugador.opuesto);
 
                 }else{    
                     voz.crash();
@@ -72,7 +71,6 @@ function controlador(evento){
                     var casilla = laberinto.getCasilla(x,y);
                     var sentido = 'arriba';
                     jugador.avanzar(casilla, sentido);
-                    console.log("el sentido: ",jugador.sentido,"el opuesto: ", jugador.opuesto) ;
                 }else{
                     voz.crash();
                 }
@@ -86,12 +84,9 @@ function controlador(evento){
                    if (laberinto.getCasilla(x,y).tieneVecinoDer()){
                         x+=1;
                         console.log("Coordenadas : X : ",x,", Y : ",y);
-                        //console.log(laberinto.getCasilla(x,y));
                         var casilla = laberinto.getCasilla(x,y);
                         var sentido = 'derecha';
                         jugador.avanzar(casilla, sentido);
-                        console.log("el sentido: ",jugador.sentido,"el opuesto: ", jugador.opuesto);
-                        //console.log(jugador.getCasilla());
                    }else{
                         voz.crash();
                    }
@@ -105,12 +100,9 @@ function controlador(evento){
                    if(laberinto.getCasilla(x,y).tieneVecinoInf()){
                         y += 1;
                         console.log("Coordenadas : X : ",x,", Y : ",y);
-                        //console.log(laberinto.getCasilla(x,y));
                         var casilla = laberinto.getCasilla(x,y);
                         var sentido = 'abajo';
                         jugador.avanzar(casilla, sentido);
-                        console.log("el sentido: ",jugador.sentido,"el opuesto: ", jugador.opuesto);
-                        //console.log(jugador.getCasilla());
                    }else{
                         voz.crash();
                    }     
@@ -119,6 +111,15 @@ function controlador(evento){
                }
             
         }
+        if(x!=0 || y!=0){
+            var juez =judge(laberinto.getCasilla(x,y));
+            console.log("el juez: ", juez) 
+            if(juez){
+                jugador.silence();
+                jugando = false;
+                voz.hablar("Gracias por jugar")
+            }
+        }
     }
 }
 function init(){
@@ -126,4 +127,18 @@ function init(){
     laberinto.generar();
     console.log(laberinto);
     jugador = new Jugador(null);
+}
+function judge(casilla){
+    var paredes = 0;
+    console.log(casilla);
+    if (!casilla.tieneVecinoSup()) paredes ++ ;
+    if (!casilla.tieneVecinoInf()) paredes ++ ;
+    if (!casilla.tieneVecinoIzq()) paredes ++ ;
+    if (!casilla.tieneVecinoDer()) paredes ++ ;
+    console.log("numero de paredes: ", paredes)
+    if(paredes==3){
+        return true;
+    }else{
+        return false;
+    }
 }
