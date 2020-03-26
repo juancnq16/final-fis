@@ -26,14 +26,14 @@ class Casilla{
             this.vecinoSup = vecinoSup;
     }
     tieneVecinoInf() {
-            return vecinoInf;
+            return this.vecinoInf;
     }
     setVecinoInf(vecinoInf) {
             this.vecinoInf = vecinoInf;
     }
 
     tieneVecinoIzq() {
-            return vecinoIzq;
+            return this.vecinoIzq;
     }
 
     setVecinoIzq(vecinoIzq) {
@@ -41,7 +41,7 @@ class Casilla{
     }
 
     tieneVecinoDer() {
-            return vecinoDer;
+            return this.vecinoDer;
     }
 
     setVecinoDer( vecinoDer) {

@@ -3,29 +3,31 @@ class Jugador{
         this.casilla=casilla;
         this.puntaje=0;
         this.jugando=true;
-        this.casilla.reproducir();
+        //this.casilla.reproducir();
         this.posX = 0;
         this.posY = 0;
-        this.sentido = '';
+        this.sentido = null;
+        this.avanza = false;
+        this.opuesto=null;
+        this.reproductor = new Reproductor();
     }
-    avanzar(casilla){
-        if(this.casilla.escala != casilla.escala){ //si las escalas son distintas
-            if(this.casilla.tono != casilla.tono){ //si los tonos son distintos
-                this.casilla.detener(); 
-                this.casilla = new casilla2(casilla.escala, casilla.tono);
-                this.casilla.reproducir();
-            }else{
-                this.casilla.detener();
-                this.casilla = new Casilla2(casilla.escala, this.casilla.tono)
-                this.casilla.reproducir();
-            }
-        }else{
-            if(this.casilla.tono != casilla.tono){
-                this.casilla.detener();
-                this.casilla = new Casilla2(this.casilla.escala, casilla.tono);
-                this.casilla.reproducir();
-            }
+    avanzar(casilla, sentido){
+        this.casilla = casilla;
+        this.sentido=sentido;
+        if(this.sentido==null){
+            this.avanza=true;
+            this.sentido=sentido;
+            this.opuesto = this.getOpuesto();
+            this.swap();
+
+        }else if(this.sentido==this.opuesto){
+            //this.sentido=sentido;
+            this.opuesto = this.getOpuesto();
+            this.avanza=!this.avanza;
+            this.swap();
         }
+        this.opuesto = this.getOpuesto();
+        this.swap();
     }
     avanzaX(){
         this.posX +=1;
@@ -44,5 +46,30 @@ class Jugador{
     }
     getY(){
         return this.posY;
+    }
+    getCasilla(){
+        return this.casilla;
+    }
+    getOpuesto(){
+        if(this.sentido=="arriba"){
+            return "abajo";
+        }
+        if(this.sentido=="derecha"){
+            return "izquierda";
+        }
+        if(this.sentido=="izquierda"){
+            return "derecha";
+        }
+        if(this.sentido=="abajo"){
+            return "arriba";
+        }
+        return 0;
+    }
+    swap(){
+        if (!this.avanza){
+            this.reproductor.vamos();
+        }else{
+            this.reproductor.volvemos();
+        }
     }
 }
