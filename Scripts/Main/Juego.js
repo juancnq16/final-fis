@@ -20,7 +20,7 @@ function prueba(){
 }
 */
 function controlador(evento){
-    console.log(evento.which);
+    //console.log(evento.which);
     if(evento.which == 13 && !jugando){//el saludo
         voz.saludo();
     }
@@ -96,7 +96,7 @@ function controlador(evento){
         }
         if(evento.which==40){//Abajo
                if(y<3){
-                   console.log(laberinto.getCasilla(x,y).tieneVecinoInf());
+                   //console.log(laberinto.getCasilla(x,y).tieneVecinoInf());
                    if(laberinto.getCasilla(x,y).tieneVecinoInf()){
                         y += 1;
                         console.log("Coordenadas : X : ",x,", Y : ",y);
@@ -113,7 +113,7 @@ function controlador(evento){
         }
         if(x!=0 || y!=0){
             var juez =judge(laberinto.getCasilla(x,y));
-            console.log("el juez: ", juez) 
+            //console.log("el juez: ", juez) 
             if(juez){
                 jugador.silence();
                 jugando = false;
@@ -125,17 +125,17 @@ function controlador(evento){
 function init(){
     laberinto = new Laberinto(4,4);
     laberinto.generar();
-    console.log(laberinto);
+    //console.log(laberinto);
     jugador = new Jugador(null);
 }
 function judge(casilla){
     var paredes = 0;
-    console.log(casilla);
+    //console.log(casilla);
     if (!casilla.tieneVecinoSup()) paredes ++ ;
     if (!casilla.tieneVecinoInf()) paredes ++ ;
     if (!casilla.tieneVecinoIzq()) paredes ++ ;
     if (!casilla.tieneVecinoDer()) paredes ++ ;
-    console.log("numero de paredes: ", paredes)
+    //console.log("numero de paredes: ", paredes)
     if(paredes==3){
         return true;
     }else{
